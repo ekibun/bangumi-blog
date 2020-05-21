@@ -95,7 +95,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -108,7 +108,7 @@ module.exports = React;
 /* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(5);
+module.exports = __webpack_require__(6);
 
 
 /***/ }),
@@ -155,12 +155,30 @@ module.exports = _asyncToGenerator;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(7);
+
+var iterableToArrayLimit = __webpack_require__(8);
+
+var unsupportedIterableToArray = __webpack_require__(9);
+
+var nonIterableRest = __webpack_require__(11);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports) {
 
 module.exports = ReactDOM;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -169,10 +187,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2);
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(0);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(0);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(4);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
+
 
 
 
@@ -181,80 +202,93 @@ __webpack_require__.r(__webpack_exports__);
  * @Author: ekibun
  * @Date: 2020-05-21 20:53:14
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 00:21:02
+ * @LastEditTime: 2020-05-22 01:00:32
  */
 
 
 var parentElement = document.getElementById('fileUpload').parentElement;
 var uploaderDOM = document.createElement('div');
+var fileUploadUploader = document.getElementById('fileUploadUploader');
+fileUploadUploader && fileUploadUploader.remove();
+parentElement.querySelectorAll('div').forEach(function (p) {
+  return p.style.display = 'none';
+});
 parentElement.prepend(uploaderDOM);
 
 function Uploader() {
-  var inputRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])();
-  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
-    var fileUploadUploader = document.getElementById('fileUploadUploader');
-    fileUploadUploader && fileUploadUploader.remove();
-    document.getElementById('fileUpload').style.display = 'none';
-    document.getElementById('upload_success').style.display = 'none';
-    var $$ = $;
-    $ = Object.assign(function () {
-      if ((arguments.length <= 0 ? undefined : arguments[0]) === '#fileUpload') return {
-        fileUploadClearQueue: function fileUploadClearQueue() {
-          console.log('clear');
-          inputRef.current.value = '';
-        },
-        fileUploadStart: function fileUploadStart() {
-          return _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-            var file, fd, rsp;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    file = inputRef.current.files[0];
-                    fd = new FormData();
-                    fd.append('Filename', file.name);
-                    fd.append('Filedata', file);
-                    fd.append('Upload', 'Submit Query');
-                    _context.next = 7;
-                    return fetch("/blog/upload_photo?folder=/blog/files&sid=".concat(CHOBITS_SID), {
-                      method: 'POST',
-                      body: fd
-                    });
+  var inputRef = Object(react__WEBPACK_IMPORTED_MODULE_3__["useRef"])();
 
-                  case 7:
-                    rsp = _context.sent;
-                    _context.t0 = parentElement.innerHTML;
-                    _context.next = 11;
-                    return rsp.text();
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_3__["useState"])(false),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_2___default()(_useState, 2),
+      uploading = _useState2[0],
+      setUploading = _useState2[1];
 
-                  case 11:
-                    parentElement.innerHTML = _context.t0 += _context.sent;
-                    inputRef.current.value = '';
-
-                  case 13:
-                  case "end":
-                    return _context.stop();
-                }
-              }
-            }, _callee);
-          }))();
-        }
-      };
-      return $$.apply(void 0, arguments);
-    }, $$);
-  }, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement("input", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_3___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("input", {
     type: "file",
     accept: "image/*",
     ref: inputRef,
     form: ""
-  });
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("a", {
+    onClick: /*#__PURE__*/_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+      var file, fd, rsp;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              file = inputRef.current.files[0];
+
+              if (!(!file || uploading)) {
+                _context.next = 3;
+                break;
+              }
+
+              return _context.abrupt("return");
+
+            case 3:
+              setUploading(true);
+              fd = new FormData();
+              fd.append('Filename', file.name);
+              fd.append('Filedata', file);
+              fd.append('Upload', 'Submit Query');
+              _context.next = 10;
+              return fetch("/blog/upload_photo?folder=/blog/files&sid=".concat(CHOBITS_SID), {
+                method: 'POST',
+                body: fd
+              });
+
+            case 10:
+              rsp = _context.sent;
+              _context.t0 = $(parentElement);
+              _context.next = 14;
+              return rsp.text();
+
+            case 14:
+              _context.t1 = _context.sent;
+
+              _context.t0.append.call(_context.t0, _context.t1);
+
+              inputRef.current.value = '';
+              setUploading(false);
+
+            case 18:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    })),
+    className: "l"
+  }, "\u4E0A\u4F20\u56FE\u7247", uploading ? '中...' : ''), " | ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("a", {
+    onClick: function onClick() {
+      inputRef.current.value = '';
+    }
+  }, "\u6E05\u7A7A\u961F\u5217")));
 }
 
-react_dom__WEBPACK_IMPORTED_MODULE_3___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement(Uploader, null), uploaderDOM);
+react_dom__WEBPACK_IMPORTED_MODULE_4___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(Uploader, null), uploaderDOM);
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -987,6 +1021,92 @@ try {
   Function("r", "regeneratorRuntime = r")(runtime);
 }
 
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(arr, i) {
+  if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(10);
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest;
 
 /***/ })
 /******/ ]);
