@@ -3,7 +3,7 @@
  * @Author: ekibun
  * @Date: 2020-05-21 20:44:00
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 00:00:38
+ * @LastEditTime: 2020-05-22 00:23:45
  */ 
 const path = require('path')
 const webpack = require('webpack')
@@ -17,10 +17,12 @@ module.exports = {
   optimization: {
     minimize: false
   },
-  entry:  path.join(__dirname, "src/index.js"),
+  entry:  {
+    'bangumi-image-uploader': path.join(__dirname, "src/bangumi-image-uploader.js")
+  },
   output: {
     path: path.join(__dirname, "dist"),
-    filename: "index.user.js"
+    filename: "[name].user.js"
   },
   externals: {
     'react': 'React',

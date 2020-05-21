@@ -181,18 +181,19 @@ __webpack_require__.r(__webpack_exports__);
  * @Author: ekibun
  * @Date: 2020-05-21 20:53:14
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 00:01:18
+ * @LastEditTime: 2020-05-22 00:21:02
  */
 
 
-var parentElement = document.getElementById('fileUploadUploader').parentElement;
+var parentElement = document.getElementById('fileUpload').parentElement;
 var uploaderDOM = document.createElement('div');
 parentElement.prepend(uploaderDOM);
 
 function Uploader() {
   var inputRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])();
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
-    document.getElementById('fileUploadUploader').remove();
+    var fileUploadUploader = document.getElementById('fileUploadUploader');
+    fileUploadUploader && fileUploadUploader.remove();
     document.getElementById('fileUpload').style.display = 'none';
     document.getElementById('upload_success').style.display = 'none';
     var $$ = $;

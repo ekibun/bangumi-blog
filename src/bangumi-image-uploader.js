@@ -3,19 +3,20 @@
  * @Author: ekibun
  * @Date: 2020-05-21 20:53:14
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 00:01:18
+ * @LastEditTime: 2020-05-22 00:21:02
  */ 
 import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 
-const parentElement = document.getElementById('fileUploadUploader').parentElement;
+const parentElement = document.getElementById('fileUpload').parentElement;
 const uploaderDOM = document.createElement('div');
 parentElement.prepend(uploaderDOM);
 
 function Uploader() {
   const inputRef = useRef();
   useEffect(() => {
-    document.getElementById('fileUploadUploader').remove();
+    const fileUploadUploader = document.getElementById('fileUploadUploader');
+    fileUploadUploader && fileUploadUploader.remove()
     document.getElementById('fileUpload').style.display='none';
     document.getElementById('upload_success').style.display='none';
     const $$ = $
