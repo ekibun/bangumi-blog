@@ -3,11 +3,12 @@
  * @Author: ekibun
  * @Date: 2020-05-21 20:53:14
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 13:49:58
+ * @LastEditTime: 2020-05-22 19:24:18
  */
 import $ from 'jquery';
 import React, { useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
+import styles from './index.less';
 
 const parentElement = $('#fileUpload').parent();
 $('#fileUploadUploader').remove();
@@ -40,15 +41,17 @@ function Uploader() {
             inputRef.current.value = '';
             setUploading(false);
           }}
-          className="l"
+          className={`l ${styles.linkbtn}`}
         >
           { uploading ? <img src="/img/loading_s.gif" height="10" width="10" alt="loading" /> : undefined }
           上传图片
         </a>
         {' | '}
-        <a onClick={() => {
-          inputRef.current.value = '';
-        }}
+        <a
+          className={styles.linkbtn}
+          onClick={() => {
+            inputRef.current.value = '';
+          }}
         >
           清空队列
         </a>

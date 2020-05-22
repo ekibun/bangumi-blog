@@ -1,64 +1,70 @@
 /*
- * @Description:
+ * @Description: webpack configuration
  * @Author: ekibun
  * @Date: 2020-05-21 20:44:00
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 14:35:47
+ * @LastEditTime: 2020-05-22 22:18:19
  */
 const path = require('path');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
 const config = require('./config');
+const ScriptDevPlugin = require('./script-dev-webpack-plugin');
 
-module.exports = (_env, argv) => {
-  const isDev = argv.mode === 'development';
-  const uglifyJsPlugin = new UglifyJsPlugin({
-    uglifyOptions: {
-      output: {
-        preamble: config.createMeta(isDev),
+const cssLoaderConfig = [
+  'style-loader',
+  {
+    loader: 'css-loader',
+    options: {
+      modules: true,
+    },
+  },
+];
+
+/** @type { webpack.Configuration } */
+module.exports = {
+  entry: Object.assign({}, ...config.entry.map((entry) => ({
+    [entry]: path.join(__dirname, `src/${entry}/index.js`),
+  }))),
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].user.js',
+  },
+  externals: Object.assign({}, ...config.externals.deps.map(
+    ([dep, variable]) => ({ [dep]: variable }),
+  )),
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
       },
-    },
-  });
-  const webpackConfig = [{
-    optimization: {
-      minimizer: [uglifyJsPlugin],
-    },
-    entry: path.join(__dirname, 'src', `${config.entry}.js`),
-    output: {
-      path: path.join(__dirname, 'dist'),
-      filename: `${isDev ? 'index' : config.entry}.user.js`,
-    },
-    externals: Object.assign({}, ...config.externals.deps.map(
-      ([dep, variable]) => ({ [dep]: variable }),
-    )),
-    module: {
-      rules: [
-        {
-          test: /\.js$/,
-          exclude: /node_modules|bower_components/,
-          loader: 'babel-loader',
-        },
-      ],
-    },
-    devServer: {
-      port: 2780,
-      hot: false,
-      disableHostCheck: true,
-      contentBase: 'dist',
-    },
-  }];
-  if (isDev) {
-    webpackConfig.push({
-      optimization: {
-        minimize: true,
-        minimizer: [uglifyJsPlugin],
+      {
+        test: /\.less$/,
+        use: [
+          ...cssLoaderConfig,
+          'less-loader',
+        ],
       },
-      target: 'node',
-      entry: path.join(__dirname, 'src/dev.user.js'),
-      output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'dev.user.js',
+      {
+        test: /\.css$/,
+        loaders: cssLoaderConfig,
       },
-    });
-  }
-  return webpackConfig;
+    ],
+  },
+  devServer: {
+    hot: false,
+    disableHostCheck: true,
+    contentBase: './dist',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+    ...config.devServer,
+  },
+  plugins: [
+    new webpack.HashedModuleIdsPlugin(),
+    new ScriptDevPlugin({
+      configPath: path.join(__dirname, 'config'),
+    }),
+  ],
 };

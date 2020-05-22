@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "user-script-webpack",
   "scripts": {
-    "build": "webpack -d",
+    "build": "webpack -p",
     "dev": "webpack-dev-server -d"
   },
   "author": "ekibun",
@@ -21,6 +21,7 @@
     "eslint-plugin-jsx-a11y": "6.2.3",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "2.5.0",
+    "html-webpack-plugin": "^4.3.0",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "userscript-meta": "^1.0.1",
     "webpack": "^4.43.0",
@@ -28,8 +29,11 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "css-loader": "^3.5.3",
     "jquery": "^3.5.1",
+    "less-loader": "^6.1.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "style-loader": "^1.2.1"
   }
 }
