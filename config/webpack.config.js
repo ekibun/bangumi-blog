@@ -3,7 +3,7 @@
  * @Author: ekibun
  * @Date: 2020-05-21 20:44:00
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 22:18:19
+ * @LastEditTime: 2020-05-22 23:39:29
  */
 const path = require('path');
 const webpack = require('webpack');
@@ -23,10 +23,10 @@ const cssLoaderConfig = [
 /** @type { webpack.Configuration } */
 module.exports = {
   entry: Object.assign({}, ...config.entry.map((entry) => ({
-    [entry]: path.join(__dirname, `src/${entry}/index.js`),
+    [entry]: path.join(__dirname, `../src/${entry}`),
   }))),
   output: {
-    path: path.join(__dirname, 'dist'),
+    path: path.join(__dirname, '../dist'),
     filename: '[name].user.js',
   },
   externals: Object.assign({}, ...config.externals.deps.map(
@@ -55,7 +55,7 @@ module.exports = {
   devServer: {
     hot: false,
     disableHostCheck: true,
-    contentBase: './dist',
+    contentBase: 'dist',
     headers: {
       'Access-Control-Allow-Origin': '*',
     },

@@ -1,9 +1,9 @@
 /*
- * @Description:
+ * @Description: meta daya
  * @Author: ekibun
  * @Date: 2020-05-22 19:19:42
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 21:31:34
+ * @LastEditTime: 2020-05-22 23:22:14
  */
 
 module.exports = {

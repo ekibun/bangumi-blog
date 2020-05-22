@@ -1,9 +1,9 @@
 /*
- * @Description:
+ * @Description: script main
  * @Author: ekibun
  * @Date: 2020-05-21 20:53:14
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 19:24:18
+ * @LastEditTime: 2020-05-22 23:22:06
  */
 import $ from 'jquery';
 import React, { useRef, useState } from 'react';
