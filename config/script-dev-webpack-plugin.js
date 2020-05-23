@@ -3,7 +3,7 @@
  * @Author: ekibun
  * @Date: 2020-05-22 14:21:20
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-23 00:40:40
+ * @LastEditTime: 2020-05-23 10:05:10
  */
 /**
  * @typedef { object } ScriptConfig
@@ -17,7 +17,7 @@ const { RawSource, ConcatSource } = require('webpack-sources');
 const userscriptMeta = require('userscript-meta');
 const prettyError = require('html-webpack-plugin/lib/errors.js');
 const { CachedChildCompilation } = require('html-webpack-plugin/lib/cached-child-compiler');
-const runOpen = require('opn');
+const runOpen = require('open');
 
 /** @type { (config: ScriptConfig, dev: Boolean) => String } */
 const getMetadata = (config, dev) => `${userscriptMeta.stringify({
