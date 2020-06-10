@@ -3,13 +3,13 @@
  * @Author: ekibun
  * @Date: 2020-05-22 09:02:42
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-22 23:45:27
+ * @LastEditTime: 2020-06-10 20:59:11
  */
 const pkg = require('../package.json');
 
 /** @type { import('./script-dev-webpack-plugin').ScriptConfig } */
 const config = {
-  entry: ['bangumi-image-uploader'],
+  entry: ['mirror-jump'],
   meta: {
     author: pkg.author,
     license: pkg.license,
@@ -19,11 +19,11 @@ const config = {
     deps: [
       ['react', 'React', (dev) => `umd/react.${dev ? 'development' : 'production.min'}.js`],
       ['react-dom', 'ReactDOM', (dev) => `umd/react-dom.${dev ? 'development' : 'production.min'}.js`],
-      ['jquery', '$'],
+      ['jquery', '$', () => 'dist/jquery.min.js'],
     ],
   },
   devServer: {
-    port: 2785,
+    port: 27851,
   },
 };
 

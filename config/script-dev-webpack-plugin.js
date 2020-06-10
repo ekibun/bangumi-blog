@@ -3,7 +3,7 @@
  * @Author: ekibun
  * @Date: 2020-05-22 14:21:20
  * @LastEditors: ekibun
- * @LastEditTime: 2020-05-23 10:05:10
+ * @LastEditTime: 2020-05-24 17:02:45
  */
 /**
  * @typedef { object } ScriptConfig
@@ -85,6 +85,8 @@ module.exports = class {
               compilation.assets[`${chunkName}.dev.user.js`] = new RawSource(
                 `${meta}(async () => { eval(await (await fetch('${uri}/${fileName}')).text()); })();`,
               );
+            } else {
+              runOpen(`file://${__dirname}/../dist/${fileName}`, { app: 'chrome' });
             }
           });
         });

@@ -4,7 +4,6 @@
   "description": "user-script-webpack",
   "scripts": {
     "build": "webpack -p --config ./config/webpack.config.js",
-    "dev2": "webpack-dev-server --config ./config/webpack.config.js -d",
     "dev": "nodemon --exec \"webpack-dev-server --config ./config/webpack.config.js -d\""
   },
   "author": "ekibun",
